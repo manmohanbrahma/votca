@@ -121,7 +121,7 @@ jobs:
       - name: Doxygen
         run: cmake --build builddir --target doxygen
       - name: Build Sphinx
-        if: ${{ ! startsWith(matrix.distro,'ubuntu') }}
+        if: ${{ ! startsWith(matrix.distro,'ubuntu') && matrix.distro != 'opensuse' }}
         run: cmake --build builddir --target doc
       - name: Test DESTDIR Install
         if: ${{ ! matrix.MODULE_BUILD }}
@@ -129,5 +129,5 @@ jobs:
       - name: Install
         run: sudo cmake --install builddir
       - name: Check Formatting
-        if: ${{ matrix.distro == 'latest' && ! matrix.MODULE_BUILD }}
+        if: ${{ matrix.distro == 'latest' && matrix.MODULE_BUILD != true }}
         run: cmake --build builddir --target format && git diff --submodule=diff --exit-code
