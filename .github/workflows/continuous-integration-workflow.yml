@@ -119,6 +119,7 @@ jobs:
       - name: Tests
         run: cd builddir && ctest --output-on-failure
       - name: Doxygen
+        if: ${{ matrix.MODULE_BUILD != true }}
         run: cmake --build builddir --target doxygen
       - name: Build Sphinx
         if: ${{ ! startsWith(matrix.distro,'ubuntu') && matrix.distro != 'opensuse' }}
