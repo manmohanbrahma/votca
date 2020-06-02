@@ -95,6 +95,11 @@ jobs:
       - uses: actions/checkout@master
         with:
           submodules: true
+      - name: Make latex.fmt
+        run: |
+          mkdir latex && cd latex &&
+          printf '\\documentclass{article}\n\\begin{document}\ntest\n\\end{document}' > test.tex &&
+          latex test.tex && cd .. && rm -rf latex
       - name: Setup CC and CXX
         run: |
           if ${{ matrix.toolchain == 'clang' }}; then
