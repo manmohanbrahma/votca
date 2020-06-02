@@ -122,7 +122,7 @@ jobs:
         if: ${{ matrix.MODULE_BUILD != true }}
         run: cmake --build builddir --target doxygen
       - name: Build Sphinx
-        if: ${{ ! startsWith(matrix.distro,'ubuntu') && matrix.distro != 'opensuse' }}
+        if: ${{ ! startsWith(matrix.distro,'ubuntu') && matrix.distro != 'opensuse' && matrix.MODULE_BUILD != true }}
         run: cmake --build builddir --target doc
       - name: Test DESTDIR Install
         if: ${{ ! matrix.MODULE_BUILD }}
